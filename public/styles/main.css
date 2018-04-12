@@ -1,0 +1,40 @@
+:root {
+  --mdc-theme-primary: #FF9800;
+  --mdc-theme-secondary: #66bb6a;
+}
+
+html, body {
+  font-family: 'Roboto', 'Helvetica', sans-serif;
+}
+
+.album-body {
+  padding: 12px;
+}
+
+.album-add {
+  bottom: 1rem;
+  right: 1rem;
+  position: fixed;
+  z-index: 1;
+}
+
+.mdc-image-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.mdc-image-list.standard-image-list .mdc-image-list__item {
+  width: calc(100% / 5 - 8px);
+  margin: 4px;
+  object-fit: cover;
+}
+
+@media (max-width: 599px){
+  .mdc-image-list.standard-image-list .mdc-image-list__item {
+    width: calc(100% / 3 - 8px);
+    margin: 4px;
+    object-fit: cover;
+  }
+}
