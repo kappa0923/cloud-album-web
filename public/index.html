@@ -27,12 +27,7 @@
   <main>
     <div class="mdc-toolbar-fixed-adjust"></div>
     <div class="album-body">
-      <ul class="mdc-image-list standard-image-list album-body--list">
-        <li class="mdc-image-list__item">
-          <div class="mdc-image-list__image-aspect-container">
-            <img class="mdc-image-list__image" src="https://firebasestorage.googleapis.com/v0/b/cloudalbum-d05c9.appspot.com/o/images%2F1515921988523.jpeg?alt=media&token=d8061c43-383a-4b34-8e87-bc428a4e7211">
-          </div>
-        </li>
+      <ul id="pictures" class="mdc-image-list standard-image-list album-body--list">
       </ul>
     </div>
 
@@ -47,14 +42,19 @@
   <!-- MDC -->
   <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/layzr.js@2.2.2/dist/layzr.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/micromodal/dist/micromodal.min.js"></script>
-  <script src="scripts/index.js"></script>
+  <script defer src="scripts/index.js"></script>
 
   <!-- 01. ここにスニペットをコピー -->
   <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
   <script>
     // Initialize Firebase
     var config = {
+      apiKey: "AIzaSyC084mOCHB7cGcC06r5UDsvr9OuuTdNV3A",
+      authDomain: "cloudalbum-d05c9.firebaseapp.com",
+      databaseURL: "https://cloudalbum-d05c9.firebaseio.com",
+      projectId: "cloudalbum-d05c9",
+      storageBucket: "cloudalbum-d05c9.appspot.com",
+      messagingSenderId: "974179221233"
     };
     firebase.initializeApp(config);
   </script>

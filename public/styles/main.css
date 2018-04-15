@@ -25,14 +25,24 @@ html, body {
   padding: 0;
 }
 
-.mdc-image-list.standard-image-list .mdc-image-list__item {
+.mdc-image-list__item {
   width: calc(100% / 5 - 8px);
   margin: 4px;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 2s ease-in-out;
+}
+
+.mdc-image-list__item.visible {
+  opacity: 1;
+}
+
+.mdc-image-list__image {
   object-fit: cover;
 }
 
 @media (max-width: 599px){
-  .mdc-image-list.standard-image-list .mdc-image-list__item {
+  .mdc-image-list__item {
     width: calc(100% / 3 - 8px);
     margin: 4px;
     object-fit: cover;
