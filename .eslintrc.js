@@ -1,30 +1,7 @@
 module.exports = {
-  "env": {
-    "browser": true,
-    "es6": true
-  },
-  "extends": "eslint:recommended",
+  "extends": "google",
   "parserOptions": {
-    "sourceType": "module"
-  },
-  "rules": {
-    "no-console": "off",
-    "non-used": "warn",
-    "indent": [
-      "error",
-      2
-    ],
-    "linebreak-style": [
-      "error",
-      "unix"
-    ],
-    "quotes": [
-      "error",
-      "single"
-    ],
-    "semi": [
-      "error",
-      "always"
-    ]
+    "ecmaVersion": 2017,
+    "sourceType": "module",
   }
 };
