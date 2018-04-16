@@ -23,18 +23,16 @@ https://firebase.google.com/docs/cli/?hl=ja
 ### 4. check your firebase-tools version
 ```
 $ firebase --version
-3.16.0 or newer
+3.18.0 or newer
 ```
 
 ## 手順
 ### 1. ファイルアップロード部分の作成
-### 2. ファイル読み込み部分の作成
+### 2. ファイル読み込み部分の作成
 
 ## Useful link
 https://github.com/callmecavs/layzr.js
 
 https://qiita.com/suin/items/8de26866a8ab6ca65ba4
-
-https://github.com/Ghosh/micromodal
 
 https://developer.mozilla.org/ja/docs/Web/CSS/@media
