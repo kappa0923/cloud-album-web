@@ -26,11 +26,13 @@
   </header>
   <main>
     <div class="mdc-toolbar-fixed-adjust"></div>
+    <!-- Pictures container -->
     <div class="album-body">
       <ul id="pictures" class="mdc-image-list standard-image-list album-body--list">
       </ul>
     </div>
 
+    <!-- Add picture button -->
     <input type="file" id="album-upload" style="display:none" accept="image/*,capture=camera"></input>
     <button id="album-add" class="mdc-fab material-icons mdc-ripple-upgraded album-add" aria-label="Add" tabindex="0" style="--mdc-ripple-fg-size:33.6px; --mdc-ripple-fg-scale:2.65464; --mdc-ripple-fg-translate-start:24.161px, 10.821px; --mdc-ripple-fg-translate-end:11.2px, 11.2px;">
       <span class="mdc-fab__icon">
@@ -45,19 +47,6 @@
   <script defer src="scripts/index.js"></script>
 
   <!-- 01. ここにスニペットをコピー -->
-  <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
-  <script>
-    // Initialize Firebase
-    var config = {
-      apiKey: "AIzaSyC084mOCHB7cGcC06r5UDsvr9OuuTdNV3A",
-      authDomain: "cloudalbum-d05c9.firebaseapp.com",
-      databaseURL: "https://cloudalbum-d05c9.firebaseio.com",
-      projectId: "cloudalbum-d05c9",
-      storageBucket: "cloudalbum-d05c9.appspot.com",
-      messagingSenderId: "974179221233"
-    };
-    firebase.initializeApp(config);
-  </script>
   <!-- 01. end -->
   <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-firestore.js"></script>
 </body>
