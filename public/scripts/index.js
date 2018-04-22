@@ -58,7 +58,9 @@ class CloudAlbum {
 
     this.initFirebase();
 
-    // this.loadPictures();
+    // TODO : 07. 画像を指定して表示
+    // TODO : 08. リアルタイム表示するなら不要
+    // this.loadPictures('pic-01', '1523809671051.jpg', false);
   }
 
   /**
@@ -68,16 +70,17 @@ class CloudAlbum {
     this.storageRef = firebase.storage().ref();
     this.firestore = firebase.firestore();
 
-    this.firestore.collection('images')
-      .orderBy('updatedDate')
-      .onSnapshot(async (querySnapshot) => {
-        for (let change of querySnapshot.docChanges) {
-          if (change.type === 'added') {
-            await this.loadPictures(change.doc.id,
-              change.doc.data().fileName, change.doc.data().isThumb);
-          }
-        }
-      });
+    // TODO : 08. 画像の情報をFirestoreから読み出し
+    // this.firestore.collection('images')
+    //   .orderBy('updatedDate')
+    //   .onSnapshot(async (querySnapshot) => {
+    //     for (let change of querySnapshot.docChanges) {
+    //       if (change.type === 'added') {
+    //         await this.loadPictures(change.doc.id,
+    //           change.doc.data().fileName, change.doc.data().isThumb);
+    //       }
+    //     }
+    //   });
   }
 
   /**
@@ -88,19 +91,28 @@ class CloudAlbum {
    * @return {Promise} FirebaseのPromise
    */
   loadPictures(key, fileName, isThumb) {
-    if (isThumb) {
-      return this.storageRef.child(`images/thumb_${fileName}`)
-        .getDownloadURL()
-        .then((url) => {
-          this.displayPicture(key, url);
-        });
-    } else {
-      return this.storageRef.child(`images/${fileName}`)
-        .getDownloadURL()
-        .then((url) => {
-          this.displayPicture(key, url);
-        });
-    }
+    // TODO : 07. 単一の画像をダウンロード
+    // TODO : 11. サムネイル表示するなら不要
+    // return this.storageRef.child(`images/${fileName}`)
+    //   .getDownloadURL()
+    //   .then((url) => {
+    //     this.displayPicture(key, url);
+    //   });
+
+    // TODO : 11. サムネイル画像を表示
+    // if (isThumb) {
+    //   return this.storageRef.child(`images/thumb_${fileName}`)
+    //     .getDownloadURL()
+    //     .then((url) => {
+    //       this.displayPicture(key, url);
+    //     });
+    // } else {
+    //   return this.storageRef.child(`images/${fileName}`)
+    //     .getDownloadURL()
+    //     .then((url) => {
+    //       this.displayPicture(key, url);
+    //     });
+    // }
   }
 
   /**
@@ -109,8 +121,10 @@ class CloudAlbum {
    * @param {string} picUrl 表示画像のURL
    */
   displayPicture(key, picUrl) {
+    // 表示する子要素のcontainerを取得
     let item = document.getElementById(key);
 
+    // 子要素を生成
     if (!item) {
       const container = document.createElement('li');
       container.innerHTML = CloudAlbum.PICTURE_TEMPLATE;
@@ -118,6 +132,8 @@ class CloudAlbum {
       item.setAttribute('id', key);
       this.pictureList.appendChild(item);
     }
+
+    // 子要素の画像のURLを指定
     if (picUrl) {
       item.querySelector('.pic').setAttribute('src', picUrl);
       item.querySelector('.link').setAttribute('href', picUrl);
@@ -143,14 +159,17 @@ class CloudAlbum {
    * @param {object} event イベントオブジェクト
    */
   uploadImage(event) {
-    const file = event.target.files[0];
-    const extension = file.name.split('.').pop();
-    const fileName = `${Date.now()}.${extension}`;
-    const imageRef = this.storageRef.child(`images/${fileName}`);
+    // TODO : 06. ファイルアップロード処理
+    // const file = event.target.files[0];
+    // const extension = file.name.split('.').pop();
+    // const fileName = `${Date.now()}.${extension}`;
+    // const imageRef = this.storageRef.child(`images/${fileName}`);
 
     imageRef.put(file).then(() => {
       console.log('Uploaded file');
-      this.saveImageInfo(fileName);
+
+      // TODO : 08. 画像情報をFirestoreに保存する
+      // this.saveImageInfo(fileName);
     });
 
     this.uploadInput.value = '';
