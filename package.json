@@ -1,5 +1,6 @@
 {
   "name": "cloud-album",
+  "version": "1.0.0",
   "scripts": {
     "build": "npm install",
     "serve": "firebase serve",
@@ -8,11 +9,11 @@
     "deploy": "firebase deploy",
     "logs": "firebase functions:log"
   },
-  "main": "lib/index.js",
   "dependencies": {},
   "devDependencies": {
     "eslint": "^4.19.1",
     "eslint-config-google": "^0.9.1"
   },
+  "author": "kappa0923 (https://github.com/kappa0923/)",
   "private": true
 }

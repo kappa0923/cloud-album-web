@@ -101,6 +101,7 @@ exports.generateThumbnail = functions.storage.object().onFinalize((object) => {
   }).then(() => {
     console.info('Document update ', fileName);
 
+    // サムネイルの情報をアップデート
     return firestore.collection('images').where('fileName', '==', fileName)
       .get()
       .then((snapshot) => {
@@ -111,6 +112,7 @@ exports.generateThumbnail = functions.storage.object().onFinalize((object) => {
         });
       });
   }).then(() => {
+    // ローカルの後処理
     fs.unlinkSync(localTmpFile);
     fs.unlinkSync(localTmpThumbFile);
     console.info('Delete local tmp files',
