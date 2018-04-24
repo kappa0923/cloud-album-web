@@ -70,6 +70,9 @@ class CloudAlbum {
     this.storageRef = firebase.storage().ref();
     this.firestore = firebase.firestore();
 
+    const settings = { timestampsInSnapshots: true };
+    this.firestore.settings(settings);
+
     // TODO : 08. 画像の情報をFirestoreから読み出し
     // this.firestore.collection('images')
     //   .orderBy('updatedDate')
