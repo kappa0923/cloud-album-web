@@ -60,7 +60,7 @@ class CloudAlbum {
 
     // TODO : 07. 画像を指定して表示
     // TODO : 08. リアルタイム表示するなら不要
-    // this.loadPictures('pic-01', '1523809671051.jpg', false);
+    // this.loadPictures('pic-01', '1523809671051.jpg', '');
   }
 
   /**
@@ -92,7 +92,7 @@ class CloudAlbum {
    */
   loadPictures(key, fileName, imageLabel) {
     // TODO : 07. 単一の画像をダウンロード
-    // TODO : 11. サムネイル表示するなら不要
+    // TODO : 11. ラベル表示するなら不要
     // return this.storageRef.child(`images/${fileName}`)
     //   .getDownloadURL()
     //   .then((url) => {
