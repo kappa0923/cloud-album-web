@@ -70,17 +70,14 @@ class CloudAlbum {
     this.storageRef = firebase.storage().ref();
     this.firestore = firebase.firestore();
 
-    const settings = { timestampsInSnapshots: true };
-    this.firestore.settings(settings);
-
     // TODO : 08. 画像の情報をFirestoreから読み出し
     // this.firestore.collection('images')
     //   .orderBy('updatedDate')
     //   .onSnapshot(async (querySnapshot) => {
-    //     for (let change of querySnapshot.docChanges) {
+    //     for (let change of querySnapshot.docChanges()) {
     //       if (change.type === 'added') {
     //         await this.loadPictures(change.doc.id,
-    //           change.doc.data().fileName, change.doc.data().isThumb);
+    //           change.doc.data().fileName, change.doc.data().imageLabel);
     //       }
     //     }
     //   });
@@ -90,30 +87,30 @@ class CloudAlbum {
    * @desc Download Pictures
    * @param {string} key identify key
    * @param {string} fileName saved image file name
-   * @param {boolean} isThumb generated thumbnail or not
+   * @param {string} imageLabel generated image label
    * @return {Promise} FirebaseのPromise
    */
-  loadPictures(key, fileName, isThumb) {
+  loadPictures(key, fileName, imageLabel) {
     // TODO : 07. 単一の画像をダウンロード
     // TODO : 11. サムネイル表示するなら不要
     // return this.storageRef.child(`images/${fileName}`)
     //   .getDownloadURL()
     //   .then((url) => {
-    //     this.displayPicture(key, url);
+    //     this.displayPicture(key, url, '');
     //   });
 
-    // TODO : 11. サムネイル画像を表示
-    // if (isThumb) {
-    //   return this.storageRef.child(`images/thumb_${fileName}`)
+    // TODO : 11. 画像のラベルを表示
+    // if (imageLabel) {
+    //   return this.storageRef.child(`images/${fileName}`)
     //     .getDownloadURL()
     //     .then((url) => {
-    //       this.displayPicture(key, url);
+    //       this.displayPicture(key, url, imageLabel);
     //     });
     // } else {
     //   return this.storageRef.child(`images/${fileName}`)
     //     .getDownloadURL()
     //     .then((url) => {
-    //       this.displayPicture(key, url);
+    //       this.displayPicture(key, url, '');
     //     });
     // }
   }
@@ -122,8 +119,9 @@ class CloudAlbum {
    * @desc Display a Picture in the UI
    * @param {string} key identify key
    * @param {string} picUrl 表示画像のURL
+   * @param {string} imageLabel 画像のラベル
    */
-  displayPicture(key, picUrl) {
+  displayPicture(key, picUrl, imageLabel) {
     // 表示する子要素のcontainerを取得
     let item = document.getElementById(key);
 
@@ -141,6 +139,14 @@ class CloudAlbum {
       item.querySelector('.pic').setAttribute('src', picUrl);
       item.querySelector('.link').setAttribute('href', picUrl);
     }
+
+    // TODO : 11. 画像のラベルがあるなら表示
+    // if (imageLabel) {
+    //   const labelContainer = document.createElement('span');
+    //   labelContainer.innerHTML = imageLabel;
+    //   labelContainer.classList.add('image-label');
+    //   item.firstChild.appendChild(labelContainer);
+    // }
 
     // Show the card fading-in.
     setTimeout(() => {

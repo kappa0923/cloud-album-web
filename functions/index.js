@@ -26,50 +26,31 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 admin.initializeApp(functions.config().firebase);
-const gcs = require('@google-cloud/storage')();
+const { Storage } = require('@google-cloud/storage');
+const gcs = new Storage();
+const vision = require('@google-cloud/vision');
 const path = require('path');
 const os = require('os');
 const fs = require('fs');
-const sharp = require('sharp');
-
-const THUMB_MAX_SIZE = 200;
-const THUMB_PREFIX = 'thumb_';
 
 /**
- * Generate a thumbnail automatically using Jimp when an image uploaded
- * in the Storage.
+ * Generate a label automatically using Cloud Vision API
+ * when an image uploaded in the Storage.
  */
-exports.generateThumbnail = functions.storage.object().onFinalize((object) => {
+exports.detectLabels = functions.storage.object().onFinalize((object) => {
   // Get file object
   const fileBucket = object.bucket;
   const filePath = object.name;
   const fileName = path.basename(filePath);
-  const fileDir = path.dirname(filePath);
-  const thumbFilePath = path.normalize(path.join(fileDir, `${THUMB_PREFIX}${fileName}`));
   const contentType = object.contentType;
   const resourceState = object.resourceState;
   const localTmpFile = path.join(os.tmpdir(), fileName);
-  const localTmpThumbFile = path.join(os.tmpdir(), `${THUMB_PREFIX}${fileName}`);
   const firestore = admin.firestore();
-
-  console.info('file_data:\n', {
-    filePath: filePath,
-    fileName: fileName,
-    fileDir: fileDir,
-    thumbFilePath: thumbFilePath,
-    localTmpFile: localTmpFile,
-    localTmpThumbFile: localTmpThumbFile,
-  });
+  const client = new vision.ImageAnnotatorClient();
 
   // 画像ファイルでなければ終了
   if (!contentType.startsWith('image/')) {
     console.info('This is not an image.');
-    return 0;
-  }
-
-  // 既にサムネイル画像だったら終了
-  if (fileName.startsWith(THUMB_PREFIX)) {
-    console.info('Already a Thumbnail.');
     return 0;
   }
 
@@ -80,43 +61,34 @@ exports.generateThumbnail = functions.storage.object().onFinalize((object) => {
   }
 
   const bucket = gcs.bucket(fileBucket);
-  const metadata = { contentType: contentType };
 
   return bucket.file(filePath).download({
     destination: localTmpFile,
   }).then(() => {
     console.info('Image downloaded locally to', localTmpFile);
 
-    // サムネイル画像をローカルに生成
-    return sharp(localTmpFile)
-      .resize(THUMB_MAX_SIZE)
-      .toFile(localTmpThumbFile)
-      .catch((err) => console.err(err));
-  }).then(() => {
-    console.info('Thumbnail created at', localTmpThumbFile);
+    return client.labelDetection(localTmpFile);
+  }).then((res) => {
+    console.info('Label Detection ', JSON.stringify(res));
 
-    // 生成されたサムネイル画像をアップロード
-    return bucket.upload(localTmpThumbFile,
-      { destination: thumbFilePath, metadata: metadata });
-  }).then(() => {
-    console.info('Document update ', fileName);
+    // 画像のラベルを取得
+    const labels = res[0].labelAnnotations.map((label) => label.description) || ['unknown'];
 
-    // サムネイルの情報をアップデート
+    // 画像の情報をアップデート
     return firestore.collection('images').where('fileName', '==', fileName)
       .get()
       .then((snapshot) => {
         snapshot.forEach((doc) => {
           const data = doc.data();
-          data.isThumb = true;
+          data.imageLabel = labels[0];
           firestore.collection('images').doc(doc.id).set(data);
         });
       });
   }).then(() => {
     // ローカルの後処理
     fs.unlinkSync(localTmpFile);
-    fs.unlinkSync(localTmpThumbFile);
     console.info('Delete local tmp files',
-      { localTmpFile: localTmpFile, localTmpThumbFile: localTmpThumbFile });
+      { localTmpFile: localTmpFile });
     return;
   })
     .then(() => console.info('Generate Thumbnail Success'))

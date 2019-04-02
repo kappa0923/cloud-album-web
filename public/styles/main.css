@@ -37,8 +37,25 @@ html, body {
   opacity: 1;
 }
 
+.mdc-image-list__image-aspect-container {
+  position: relative;
+}
+
 .mdc-image-list__image {
   object-fit: cover;
+}
+
+.image-label {
+  position: absolute;/*絶対配置*/
+  color: white;/*文字は白に*/
+  top: 0;
+  left: 0;
+  z-index: 500;
+  width: 95%;
+  margin: 0;
+  padding: 2px;
+  background-color: gray;
+  opacity: 0.8;
 }
 
 @media (max-width: 599px){
