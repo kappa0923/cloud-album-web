@@ -71,16 +71,16 @@ class CloudAlbum {
     this.firestore = firebase.firestore();
 
     // TODO : 08. 画像の情報をFirestoreから読み出し
-    this.firestore.collection('images')
-      .orderBy('updatedDate')
-      .onSnapshot(async (querySnapshot) => {
-        for (let change of querySnapshot.docChanges()) {
-          if (change.type === 'added') {
-            await this.loadPictures(change.doc.id,
-              change.doc.data().fileName, change.doc.data().imageLabel);
-          }
-        }
-      });
+    // this.firestore.collection('images')
+    //   .orderBy('updatedDate')
+    //   .onSnapshot(async (querySnapshot) => {
+    //     for (let change of querySnapshot.docChanges()) {
+    //       if (change.type === 'added') {
+    //         await this.loadPictures(change.doc.id,
+    //           change.doc.data().fileName, change.doc.data().imageLabel);
+    //       }
+    //     }
+    //   });
   }
 
   /**
@@ -93,11 +93,11 @@ class CloudAlbum {
   loadPictures(key, fileName, imageLabel) {
     // TODO : 07. 単一の画像をダウンロード
     // TODO : 11. ラベル表示するなら不要
-    return this.storageRef.child(`images/${fileName}`)
-      .getDownloadURL()
-      .then((url) => {
-        this.displayPicture(key, url, '');
-      });
+    // return this.storageRef.child(`images/${fileName}`)
+    //   .getDownloadURL()
+    //   .then((url) => {
+    //     this.displayPicture(key, url, '');
+    //   });
 
     // TODO : 11. 画像のラベルを表示
     // if (imageLabel) {
@@ -169,16 +169,16 @@ class CloudAlbum {
    */
   uploadImage(event) {
     // TODO : 06. ファイルアップロード処理
-    const file = event.target.files[0];
-    const extension = file.name.split('.').pop();
-    const fileName = `${Date.now()}.${extension}`;
-    const imageRef = this.storageRef.child(`images/${fileName}`);
+    // const file = event.target.files[0];
+    // const extension = file.name.split('.').pop();
+    // const fileName = `${Date.now()}.${extension}`;
+    // const imageRef = this.storageRef.child(`images/${fileName}`);
 
     imageRef.put(file).then(() => {
       console.log('Uploaded file');
 
       // TODO : 08. 画像情報をFirestoreに保存する
-      this.saveImageInfo(fileName);
+      // this.saveImageInfo(fileName);
     });
 
     this.uploadInput.value = '';
