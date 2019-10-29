@@ -16,7 +16,8 @@
 </head>
 
 <body class="mdc-typography">
-  <header class="mdc-toolbar mdc-toolbar--fixed mdc-toolbar--waterfall demo-toolbar mdc-toolbar--flexible-space-maximized">
+  <header
+    class="mdc-toolbar mdc-toolbar--fixed mdc-toolbar--waterfall demo-toolbar mdc-toolbar--flexible-space-maximized">
     <div class="mdc-toolbar__row">
       <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
         <i class="material-icons mdc-toolbar__menu-icon">photo_album</i>
@@ -34,7 +35,8 @@
 
     <!-- Add picture button -->
     <input type="file" id="album-upload" style="display:none" accept="image/*,capture=camera"></input>
-    <button id="album-add" class="mdc-fab material-icons mdc-ripple-upgraded album-add" aria-label="Add" tabindex="0" style="--mdc-ripple-fg-size:33.6px; --mdc-ripple-fg-scale:2.65464; --mdc-ripple-fg-translate-start:24.161px, 10.821px; --mdc-ripple-fg-translate-end:11.2px, 11.2px;">
+    <button id="album-add" class="mdc-fab material-icons mdc-ripple-upgraded album-add" aria-label="Add" tabindex="0"
+      style="--mdc-ripple-fg-size:33.6px; --mdc-ripple-fg-scale:2.65464; --mdc-ripple-fg-translate-start:24.161px, 10.821px; --mdc-ripple-fg-translate-end:11.2px, 11.2px;">
       <span class="mdc-fab__icon">
         add
       </span>
@@ -44,10 +46,16 @@
   <!-- MDC -->
   <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/layzr.js@2.2.2/dist/layzr.min.js"></script>
-  <script defer src="scripts/index.js"></script>
 
-  <!-- TODO : 04. ここにスニペットをコピー -->
-  <!-- 04. end -->
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="/__/firebase/7.2.2/firebase-app.js"></script>
+  <script src="/__/firebase/7.2.2/firebase-storage.js"></script>
+  <script src="/__/firebase/7.2.2/firebase-firestore.js"></script>
+
+  <!-- Initialize Firebase -->
+  <script src="/__/firebase/init.js"></script>
+
+  <script defer src="scripts/index.js"></script>
 </body>
 
 </html>
