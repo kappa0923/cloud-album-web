@@ -5,6 +5,7 @@
 
 html, body {
   font-family: 'Roboto', 'Helvetica', sans-serif;
+  margin: 0px;
 }
 
 .album-body {
@@ -16,6 +17,10 @@ html, body {
   right: 1rem;
   position: fixed;
   z-index: 1;
+}
+
+.mdc-top-app-bar-fixed-adjust {
+  padding-top: 64px;
 }
 
 .mdc-image-list {

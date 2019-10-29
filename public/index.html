@@ -9,42 +9,42 @@
   <title>Cloud Album for the web</title>
 
   <!-- Styles -->
-  <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/material-components-web@3.2.0/dist/material-components-web.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="styles/main.css">
 </head>
 
 <body class="mdc-typography">
-  <header
-    class="mdc-toolbar mdc-toolbar--fixed mdc-toolbar--waterfall demo-toolbar mdc-toolbar--flexible-space-maximized">
-    <div class="mdc-toolbar__row">
-      <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
-        <i class="material-icons mdc-toolbar__menu-icon">photo_album</i>
-        <span class="mdc-toolbar__title">Cloud Album for the web</span>
-      </section>
+  <div class="top-app-bar__frame">
+    <header class="mdc-top-app-bar mdc-top-app-bar--fixed" style="top: 0px;">
+      <div class="mdc-top-app-bar__row">
+        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+          <button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">photo_album</button>
+          <span class="mdc-top-app-bar__title">Cloud Album for the Web</span>
+        </section>
+      </div>
+    </header>
+    <div class="mdc-top-app-bar-fixed-adjust">
+      <!-- Pictures container -->
+      <div class="album-body">
+        <ul id="pictures" class="mdc-image-list standard-image-list album-body--list">
+        </ul>
+      </div>
     </div>
-  </header>
-  <main>
-    <div class="mdc-toolbar-fixed-adjust"></div>
-    <!-- Pictures container -->
-    <div class="album-body">
-      <ul id="pictures" class="mdc-image-list standard-image-list album-body--list">
-      </ul>
-    </div>
+  </div>
 
-    <!-- Add picture button -->
-    <input type="file" id="album-upload" style="display:none" accept="image/*,capture=camera"></input>
-    <button id="album-add" class="mdc-fab material-icons mdc-ripple-upgraded album-add" aria-label="Add" tabindex="0"
-      style="--mdc-ripple-fg-size:33.6px; --mdc-ripple-fg-scale:2.65464; --mdc-ripple-fg-translate-start:24.161px, 10.821px; --mdc-ripple-fg-translate-end:11.2px, 11.2px;">
-      <span class="mdc-fab__icon">
-        add
-      </span>
-    </button>
-  </main>
+  <!-- Add picture button -->
+  <input type="file" id="album-upload" style="display:none" accept="image/*,capture=camera"></input>
+  <button id="album-add" class="mdc-fab material-icons mdc-ripple-upgraded album-add" aria-label="Add" tabindex="0"
+    style="--mdc-ripple-fg-size:33.6px; --mdc-ripple-fg-scale:2.65464; --mdc-ripple-fg-translate-start:24.161px, 10.821px; --mdc-ripple-fg-translate-end:11.2px, 11.2px;">
+    <span class="mdc-fab__icon">
+      add
+    </span>
+  </button>
 
   <!-- MDC -->
-  <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+  <script src="https://unpkg.com/material-components-web@3.2.0/dist/material-components-web.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/layzr.js@2.2.2/dist/layzr.min.js"></script>
 
   <!-- The core Firebase JS SDK is always required and must be listed first -->
