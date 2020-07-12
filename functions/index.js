@@ -37,7 +37,7 @@ const fs = require('fs');
  * Generate a label automatically using Cloud Vision API
  * when an image uploaded in the Storage.
  */
-exports.detectLabels = functions.storage.object().onFinalize((object) => {
+exports.detectLabels = functions.region('asia-northeast1').storage.object().onFinalize((object) => {
   // Get file object
   const fileBucket = object.bucket;
   const filePath = object.name;
