@@ -190,26 +190,26 @@ class CloudAlbum {
    */
   saveImageInfo(fileName) {
     this.firestore.collection('images')
-      .add({
-        fileName: fileName,
-        isThumb: false,
-        updatedDate: new Date(),
-      })
-      .then(() => {
-        console.log('Document saved');
-      })
-      .catch((error) => {
-        console.error('Error adding document: ', error);
-      });
+        .add({
+          fileName: fileName,
+          isThumb: false,
+          updatedDate: new Date(),
+        })
+        .then(() => {
+          console.log('Document saved');
+        })
+        .catch((error) => {
+          console.error('Error adding document: ', error);
+        });
   }
 
   /**
    * @desc firebaseが正常にロードされているかのチェック
    */
   checkSetup() {
-    if (!window.firebase
-      || !(firebase.app instanceof Function)
-      || !firebase.app().options) {
+    if (!window.firebase ||
+      !(firebase.app instanceof Function) ||
+      !firebase.app().options) {
       window.alert('You have not configured and imported the Firebase SDK. ' +
         'Make sure you go through the codelab setup instructions and make ' +
         'sure you are running the codelab using `firebase serve`');
