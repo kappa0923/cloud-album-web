@@ -11,7 +11,7 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "eslint": "^6.6.0",
+    "eslint": "^6.8.0",
     "eslint-config-google": "^0.14.0"
   },
   "author": "kappa0923 (https://github.com/kappa0923/)",

@@ -76,21 +76,20 @@ exports.detectLabels = functions.storage.object().onFinalize((object) => {
 
     // 画像の情報をアップデート
     return firestore.collection('images').where('fileName', '==', fileName)
-      .get()
-      .then((snapshot) => {
-        snapshot.forEach((doc) => {
-          const data = doc.data();
-          data.imageLabel = labels[0];
-          firestore.collection('images').doc(doc.id).set(data);
+        .get()
+        .then((snapshot) => {
+          snapshot.forEach((doc) => {
+            const data = doc.data();
+            data.imageLabel = labels[0];
+            firestore.collection('images').doc(doc.id).set(data);
+          });
         });
-      });
   }).then(() => {
     // ローカルの後処理
     fs.unlinkSync(localTmpFile);
     console.info('Delete local tmp files',
-      { localTmpFile: localTmpFile });
+        { localTmpFile: localTmpFile });
     return;
-  })
-    .then(() => console.info('Generate Thumbnail Success'))
-    .catch((err) => console.error(err));
+  }).then(() => console.info('Generate Thumbnail Success'))
+      .catch((err) => console.error(err));
 });
