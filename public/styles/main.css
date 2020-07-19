@@ -56,9 +56,9 @@ html, body {
   top: 0;
   left: 0;
   z-index: 500;
-  width: 95%;
+  width: 96%;
   margin: 0;
-  padding: 2px;
+  padding: 2%;
   background-color: gray;
   opacity: 0.8;
 }
